@@ -1,6 +1,29 @@
-MIT License
+# gciMock
 
-Copyright (c) 2019 The Guild of Calamitous Intent
+Trying to funnel a lot of my various linux or Arduino mock interfaces
+into one project instead of constantly recreating the wheel.
+
+## `cmake` Usage
+
+```cmake
+# gciMock -----------------
+FetchContent_Declare(gciMock
+  GIT_REPOSITORY "git@github.com:the-guild-of-calamitous-intent/gciMock.git"
+  GIT_TAG "origin/main"
+  SOURCE_DIR "${CMAKE_BINARY_DIR}/_deps/gciMock"
+)
+set(EXAMPLES OFF CACHE INTERNAL "Dont build examples")
+FetchContent_MakeAvailable(gciMock)
+if(gciMock_POPULATED)
+    message(STATUS "=> Found gciMock")
+else()
+    message(STATUS "*** Didn't find gciMock")
+endif()
+```
+
+# MIT License
+
+**Copyright (c) 2019 The Guild of Calamitous Intent**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

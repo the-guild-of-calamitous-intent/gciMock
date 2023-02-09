@@ -1,7 +1,7 @@
 # v3.14 required for FetchContent_MakeAvailable
 cmake_minimum_required(VERSION 3.14)
 
-PROJECT(cgiMock
+PROJECT(gciMock
     VERSION "2023.02.08"
     LANGUAGES CXX
 )

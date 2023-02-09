@@ -17,16 +17,24 @@ extern "C" {
 }
 #endif
 
-#include <stdint.h>
-#include <stddef.h>
+// #include <stddef.h>
+#include <stdint.h>     // int types
+#include <unistd.h>			// file read/write
+#include <fcntl.h>		  // file open
+#include <sys/ioctl.h>	// Needed for I2C port
+#include <cstdio>       // printf / perror
+#include <cstring>      // memset
+
+constexpr uint8_t I2C_MAX_BUFFER_SIZE = 32;
 
 class TwoWire {
   public:
-  TwoWire() {}
+  TwoWire();
+  ~TwoWire();
 
   void    begin(int sda=0, int scl=0) {}
   void    begin(int sda, int scl, uint8_t address) {}
-
+  void    set(uint8_t address);
   void    setClock(uint32_t) {}
   void    setClockStretchLimit(uint32_t) {}
   void    beginTransmission(uint8_t) {}
@@ -42,8 +50,18 @@ class TwoWire {
   uint8_t requestFrom(int, int, int) {return 0;}
 
   size_t write(uint8_t) {return 0;}
-  size_t write(const uint8_t*, size_t) {return 0;}
+  bool write(const uint8_t reg, const uint8_t data);
   uint8_t read(void) {return 0;}
+  bool read(const uint8_t reg, const uint8_t count, uint8_t *const data);
+
+  protected:
+  int fd;
+  uint8_t outbuf[2];
+  #if defined(linux)
+  struct i2c_msg msgs[2];
+  struct i2c_rdwr_ioctl_data i2c_data;
+  #endif
+  uint8_t addr;
 };
 
 extern TwoWire Wire;

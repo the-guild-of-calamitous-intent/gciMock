@@ -71,6 +71,7 @@ bool TwoWire::write(const uint8_t reg, const uint8_t data) {
 
   return true;
 }
+
 #elif defined(__APPLE__)
 
 TwoWire::TwoWire(){}

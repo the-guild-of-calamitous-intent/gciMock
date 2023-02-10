@@ -6,6 +6,7 @@
 #pragma once
 
 // https://github.com/arduino/ArduinoCore-avr/blob/master/cores/arduino/Arduino.h
+// https://www.atwillys.de/content/cc-apps/simple-serial-port-communication-program-in-c/?lang=en
 
 #include <stdint.h>
 #include <string>
@@ -14,6 +15,8 @@
 // using namespace std;
 using std::string;
 using std::to_string;
+using std::cout;
+using std::endl;
 
 static void pinMode(uint8_t pin, uint8_t mode) {}
 static void digitalWrite(uint8_t pin, uint8_t val) {}
@@ -31,10 +34,10 @@ static int constrain(int x, int a, int b) { return std::min(b, std::max(x,a)); }
 
 struct Stream {
   void begin(int r) {}
-  void print(string a) {}
-  void print(float a, int v=0) {}
-  void println(float a, int v=0) {}
-  void println(string a) {}
+  void print(string a) {cout << a;}
+  void print(float a, int v=0) {cout << a;}
+  void println(float a, int v=0) {cout << a << endl;}
+  void println(string a) {cout << a << endl;}
   void setTimeout(int) {}
   int available() { return 1; }
   int read() { return 60; }

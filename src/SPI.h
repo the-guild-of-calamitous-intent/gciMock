@@ -1,9 +1,18 @@
-
+/**************************************************\
+* The MIT License (MIT)
+* Copyright (c) 2019 The Guild of Calamitous Intent
+* see LICENSE for full details
+\**************************************************/
 #pragma once
 
 #include <stdint.h>
 
 struct SPISettings {
+  SPISettings(int a, int b, int c) {
+    speedMaximum = a;
+    dataOrder = b;
+    dataMode = c;
+  }
   int speedMaximum, dataOrder, dataMode;
 };
 

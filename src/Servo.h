@@ -1,4 +1,8 @@
-
+/**************************************************\
+* The MIT License (MIT)
+* Copyright (c) 2019 The Guild of Calamitous Intent
+* see LICENSE for full details
+\**************************************************/
 
 #pragma once
 

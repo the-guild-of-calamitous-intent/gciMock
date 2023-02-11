@@ -6,7 +6,12 @@ into one project instead of constantly recreating the wheel.
 - mock [`Arduino`](https://www.arduino.cc/reference/en/), not everything, but useful things
     - mock `Stream` and `Serial[1,2]`
     - mock `Wire`
-    - mock `millis` and other functions
+        - working linux on Raspberry Pi
+    - working `millis`, `micros`, `delay`, and `delayMicroseconds`
+    - mock `SPI`
+    - mock `Serov`
+    - working `random` and `randomSeed`
+    - mock `pinMode` and other pin functions
 
 ## `cmake` Usage
 
@@ -49,6 +54,7 @@ endif()
 
 # Todo:
 
+- [ ] Linux i2c is based on RPi ... can I make this more generic?
 - [ ] How to add `serial_mock` to `Serial` or `Stream`
 - [ ] How to add `serial_mock` to `Wire`
 - [x] Add `Servo`

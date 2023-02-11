@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 PROJECT(gciMock
-    VERSION "2023.02.08"
+    VERSION "2023.02.11"
     LANGUAGES CXX
 )
 
@@ -31,6 +31,8 @@ add_library(${PROJECT_NAME}
     src/Arduino.cpp
     src/Wire.cpp
     # src/Wire.h
+    src/Servo.cpp
+    src/SPI.cpp
 )
 target_include_directories(${PROJECT_NAME}
     PUBLIC

@@ -3,6 +3,11 @@
 Trying to funnel a lot of my various linux or Arduino mock interfaces
 into one project instead of constantly recreating the wheel.
 
+- mock [`Arduino`](https://www.arduino.cc/reference/en/), not everything, but useful things
+    - mock `Stream` and `Serial[1,2]`
+    - mock `Wire`
+    - mock `millis` and other functions
+
 ## `cmake` Usage
 
 ```cmake
@@ -46,8 +51,8 @@ endif()
 
 - [ ] How to add `serial_mock` to `Serial` or `Stream`
 - [ ] How to add `serial_mock` to `Wire`
-- [ ] Add `Servo`
-- [ ] Handle time better with `millis` and others
+- [x] Add `Servo`
+- [x] Handle time better with `millis` and others
 - [ ] Make a version for CPM:
     ```cmake
     # CPM ==========================================================================

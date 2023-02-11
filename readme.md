@@ -9,7 +9,7 @@ into one project instead of constantly recreating the wheel.
         - working linux on Raspberry Pi
     - working `millis`, `micros`, `delay`, and `delayMicroseconds`
     - mock `SPI`
-    - mock `Serov`
+    - mock `Servo`
     - working `random` and `randomSeed`
     - mock `pinMode` and other pin functions
 

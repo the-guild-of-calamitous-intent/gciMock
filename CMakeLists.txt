@@ -47,9 +47,9 @@ target_include_directories(${PROJECT_NAME}
 
 
 # Examples ====================================================================
-# option(EXAMPLES "Examples" ON)
-# message(STATUS "Building examples is ${EXAMPLES}")
-# if (EXAMPLES)
-#     add_subdirectory(examples)
-# endif()
+option(EXAMPLES "Examples" OFF)
+message(STATUS "Building examples is ${EXAMPLES}")
+if (EXAMPLES)
+    add_subdirectory(examples/pty)
+endif()
 

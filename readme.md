@@ -19,7 +19,59 @@ if(gciMock_POPULATED)
 else()
     message(STATUS "*** Didn't find gciMock")
 endif()
+
+
+
+if (UNIX OR APPLE OR linux)
+    message(STATUS "Using mock i2c ${gcimock_BINARY_DIR}")
+    target_link_directories(${PROJECT_NAME}
+        PUBLIC
+            ${gcimock_BINARY_DIR}
+            # ${squaternion_BINARY_DIR}
+    )
+    target_include_directories(${PROJECT_NAME}
+        PUBLIC
+            ${gcimock_SOURCE_DIR}/src
+            # ${squaternion_SOURCE_DIR}/src
+    )
+    # target_link_libraries(${PROJECT_NAME}
+    #     PRIVATE
+    #         gciMock
+    #         squaternion
+    # )
+endif()
 ```
+
+# Todo:
+
+- [ ] How to add `serial_mock` to `Serial` or `Stream`
+- [ ] How to add `serial_mock` to `Wire`
+- [ ] Add `Servo`
+- [ ] Handle time better with `millis` and others
+- [ ] Make a version for CPM:
+    ```cmake
+    # CPM ==========================================================================
+    set(CPM_DOWNLOAD_LOCATION "${CMAKE_BINARY_DIR}/cmake/CPM.cmake")
+    set(CPM_VERSION v0.35.1)
+    if(NOT (EXISTS ${CPM_DOWNLOAD_LOCATION}))
+        message(STATUS "Downloading CPM.cmake")
+        file(DOWNLOAD
+            https://github.com/cpm-cmake/CPM.cmake/releases/download/${CPM_VERSION}/CPM.cmake
+            ${CPM_DOWNLOAD_LOCATION}
+        )
+    else()
+        message(STATUS "CPM ${CPM_VERSION} ready")
+    endif()
+    include(${CPM_DOWNLOAD_LOCATION})
+
+    CPMAddPackage(
+        NAME gciMock
+        VERSION 2022.08.20
+        GITHUB_REPOSITORY the-guild-of-calamitous-intent/gciMock
+        OPTIONS
+            "EXAMPLES OFF"
+    )
+    ```
 
 # MIT License
 

@@ -1,4 +1,4 @@
-#include "Arduino.h"
+// #include "Arduino.h"
 #include "mock_serial.hpp"
 #include <iostream>
 #include <string>

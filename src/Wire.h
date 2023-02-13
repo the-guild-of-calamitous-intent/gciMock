@@ -59,13 +59,13 @@ dtparam=i2c_arm=on,i2c_arm_baudrate=400000
 #define TwoWire_h
 #endif
 
-#if defined(linux)
-// sudo apt-get install libi2c-dev
-extern "C" {
-    #include <linux/i2c-dev.h>
-    #include <i2c/smbus.h>
-}
-#endif
+// #if defined(linux)
+// // sudo apt-get install libi2c-dev
+// extern "C" {
+//     #include <linux/i2c-dev.h>
+//     #include <i2c/smbus.h>
+// }
+// #endif
 
 // #include <stddef.h>
 #include <stdint.h>     // int types
@@ -79,12 +79,12 @@ constexpr uint8_t I2C_MAX_BUFFER_SIZE = 32;
 
 class TwoWire {
   public:
-  TwoWire();
-  ~TwoWire();
+  TwoWire() {}
+  ~TwoWire() {}
 
   void    begin(int sda=0, int scl=0) {}
   void    begin(int sda, int scl, uint8_t address) {}
-  void    set(uint8_t address);
+  void    set(uint8_t address) {}
   void    setClock(uint32_t) {}
   void    setClockStretchLimit(uint32_t) {}
   void    beginTransmission(uint8_t) {}
@@ -100,17 +100,17 @@ class TwoWire {
   uint8_t requestFrom(int, int, int) {return 0;}
 
   size_t write(uint8_t) {return 0;}
-  bool write(const uint8_t reg, const uint8_t data);
+  bool write(const uint8_t reg, const uint8_t data) { return true; }
   uint8_t read(void) {return 0;}
-  bool read(const uint8_t reg, const uint8_t count, uint8_t *const data);
+  bool read(const uint8_t reg, const uint8_t count, uint8_t *const data) {return true; }
 
   protected:
   int fd;
   uint8_t outbuf[2];
-  #if defined(linux)
-  struct i2c_msg msgs[2];
-  struct i2c_rdwr_ioctl_data i2c_data;
-  #endif
+  // #if defined(linux)
+  // struct i2c_msg msgs[2];
+  // struct i2c_rdwr_ioctl_data i2c_data;
+  // #endif
   uint8_t addr;
 };
 

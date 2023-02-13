@@ -14,6 +14,12 @@
 static struct timespec epoch;
 int s = clock_gettime(CLOCK_MONOTONIC_RAW, &epoch);
 
+/*
+sec      1e0
+millisec 1e-3
+microsec 1e-6
+nanosec  1e-9
+*/
 uint32_t micros(void) {
   // struct timeval now;
   // gettimeofday(&now, NULL);

@@ -1,7 +1,7 @@
 # v3.14 required for FetchContent_MakeAvailable
 cmake_minimum_required(VERSION 3.14)
 
-PROJECT(gciMock
+PROJECT(gcimock
     VERSION "2023.02.11"
     LANGUAGES CXX
 )
@@ -30,7 +30,6 @@ add_library(${PROJECT_NAME}
     src/mock_serial.cpp
     src/Arduino.cpp
     src/Wire.cpp
-    # src/Wire.h
     src/Servo.cpp
     src/SPI.cpp
 )
@@ -39,19 +38,17 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-# target_link_libraries(${PROJECT_NAME}
-#     PRIVATE
-#         wirelib
-#         # ${squaternion_SOURCE_DIR}
-#         # $<$<PLATFORM_ID:Linux>:wirelib>
-# )
-# add_dependencies(${PROJECT_NAME} squaternion)
-
 
 # Examples ====================================================================
-option(EXAMPLES "Examples" OFF)
-message(STATUS "Building examples is ${EXAMPLES}")
-if (EXAMPLES)
+option(BUILD_EXAMPLES "Examples" OFF)
+message(STATUS "Building gciMock examples is ${BUILD_EXAMPLES}")
+if (BUILD_EXAMPLES)
     add_subdirectory(examples/pty)
+endif()
+
+option(BUILD_GTESTS "build gtests" ON)
+message(STATUS "Building gciMock gtests is ${BUILD_GTESTS}")
+if (BUILD_GTESTS)
+    # add_subdirectory(gtests)
 endif()
 

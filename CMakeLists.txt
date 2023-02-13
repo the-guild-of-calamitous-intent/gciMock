@@ -58,6 +58,6 @@ endif()
 # option(BUILD_GTESTS "build gtests" ON)
 message(STATUS "Building ${PROJECT_NAME} gtests is ${BUILD_GTESTS}")
 if (BUILD_GTESTS)
-    # add_subdirectory(gtests)
+    add_subdirectory(gtests)
 endif()
 

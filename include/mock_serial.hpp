@@ -1,6 +1,14 @@
 
 #pragma once
 
+#if defined(linux) || defined(__APPLE__)
+#include <string>
+using std::string;
+#include <iostream>
+using std::cout;
+using std::endl;
+#endif
+
 struct Stream {
   void begin(int r) {}
   void print(string a) {cout << a;}

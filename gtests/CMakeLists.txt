@@ -18,7 +18,8 @@ endif()
 enable_testing()
 
 list(APPEND gci-gtests
-    main-gtest
+    gtest-arduino
+    gtest-serial
 )
 
 # message(STATUS "gci::gTests ----------------------")

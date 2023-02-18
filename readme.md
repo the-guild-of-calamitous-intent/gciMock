@@ -3,20 +3,27 @@
 Trying to funnel a lot of my various linux or Arduino mock interfaces
 into one project instead of constantly recreating the wheel.
 
-- mock [`Arduino`](https://www.arduino.cc/reference/en/), not everything, but useful things
+- [`mock_arduino.hpp`](https://www.arduino.cc/reference/en/), not everything, but useful things
     - most interfaces are dummy and just return some fix value like `1` or `0`
     - working `millis`, `micros`, `delay`, and `delayMicroseconds` should actually work
-    - mock `Servo` does nothing
     - working `random` and `randomSeed` should work
     - mock `pinMode` and other pin functions do nothing
-- `Serial` and `Wire` have to be instantiated for use
+- `mock_servo.hpp` is dummy interface
+- `mock_spi.hpp` is dummy interface
+- `mock_serial.hpp` and `mock_wire.hpp` need `Serial` and `Wire` instantiated for use
     - `SerialPort Serial, Serial1` to use
+    - `print()` and `println()` functions use `cout` to print to command line
     - `TwoWire Wire` to use
     - Can do this globally in `main.cpp`:
     ```cpp
-    #ifndef ARDUINO
-    SerialPort Serial, Serial1;
-    TwoWire Wire;
+    #if defined(ARDUINO)
+        #include <Arduino.h>
+        #include <Wire.h>
+    #elif defined(__APPLE__)
+        #include <mock_arduino.hpp>
+        #include <mock_wire.hpp>
+        SerialPort Serial, Serial1;
+        TwoWire Wire;
     #endif
     ```
 

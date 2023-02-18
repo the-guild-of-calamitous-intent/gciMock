@@ -1,31 +1,31 @@
 // #include "Arduino.h"
-#include "mock_serial.hpp"
+// #include "mock_serial.hpp"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
 int main() {
-  SerialPipe sp;
+  // SerialPipe sp;
 
-  Serial sa, sb;
-  sa.open(sp.masterfd);
-  sb.open(sp.slavefd);
+  // Serial sa, sb;
+  // sa.open(sp.masterfd);
+  // sb.open(sp.slavefd);
 
-  char bufa[128];
-  char bufb[128];
-  memcpy((void*)bufa, (void*)"hi how are you", 14);
-  sa.write((void*)bufa, 14);
-  sb.readBytes((uint8_t*)bufb, 14);
-  cout << bufb << endl;
+  // char bufa[128];
+  // char bufb[128];
+  // memcpy((void*)bufa, (void*)"hi how are you", 14);
+  // sa.write((void*)bufa, 14);
+  // sb.readBytes((uint8_t*)bufb, 14);
+  // cout << bufb << endl;
 
-  int wr = sa.write(100);
-  uint8_t b = sb.read();
-  cout << wr << " " << (int)b << endl;
+  // int wr = sa.write(100);
+  // uint8_t b = sb.read();
+  // cout << wr << " " << (int)b << endl;
 
-  wr = sb.write(200);
-  b = sa.read();
-  cout << wr << " "  << (int)b << endl;
+  // wr = sb.write(200);
+  // b = sa.read();
+  // cout << wr << " "  << (int)b << endl;
 
   return 0;
 }

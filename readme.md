@@ -4,14 +4,21 @@ Trying to funnel a lot of my various linux or Arduino mock interfaces
 into one project instead of constantly recreating the wheel.
 
 - mock [`Arduino`](https://www.arduino.cc/reference/en/), not everything, but useful things
-    - mock `Stream` and `Serial[1,2]`
-    - mock `Wire`
-        - working linux on Raspberry Pi
-    - working `millis`, `micros`, `delay`, and `delayMicroseconds`
-    - mock `SPI`
-    - mock `Servo`
-    - working `random` and `randomSeed`
-    - mock `pinMode` and other pin functions
+    - most interfaces are dummy and just return some fix value like `1` or `0`
+    - working `millis`, `micros`, `delay`, and `delayMicroseconds` should actually work
+    - mock `Servo` does nothing
+    - working `random` and `randomSeed` should work
+    - mock `pinMode` and other pin functions do nothing
+- `Serial` and `Wire` have to be instantiated for use
+    - `SerialPort Serial, Serial1` to use
+    - `TwoWire Wire` to use
+    - Can do this globally in `main.cpp`:
+    ```cpp
+    #ifndef ARDUINO
+    SerialPort Serial, Serial1;
+    TwoWire Wire;
+    #endif
+    ```
 
 ## `cmake` Usage
 
@@ -22,7 +29,6 @@ FetchContent_Declare(gciMock
   GIT_TAG "origin/main"
   SOURCE_DIR "${CMAKE_BINARY_DIR}/_deps/gciMock"
 )
-set(EXAMPLES OFF CACHE INTERNAL "Dont build examples")
 FetchContent_MakeAvailable(gciMock)
 if(gciMock_POPULATED)
     message(STATUS "=> Found gciMock")
@@ -37,26 +43,17 @@ if (UNIX OR APPLE OR linux)
     target_link_directories(${PROJECT_NAME}
         PUBLIC
             ${gcimock_BINARY_DIR}
-            # ${squaternion_BINARY_DIR}
     )
     target_include_directories(${PROJECT_NAME}
         PUBLIC
-            ${gcimock_SOURCE_DIR}/src
-            # ${squaternion_SOURCE_DIR}/src
+            ${gcimock_SOURCE_DIR}/include
     )
-    # target_link_libraries(${PROJECT_NAME}
-    #     PRIVATE
-    #         gciMock
-    #         squaternion
-    # )
 endif()
 ```
 
 # Todo:
 
-- [ ] Linux i2c is based on RPi ... can I make this more generic?
-- [ ] How to add `serial_mock` to `Serial` or `Stream`
-- [ ] How to add `serial_mock` to `Wire`
+- [x] Header only library
 - [x] Add `Servo`
 - [x] Handle time better with `millis` and others
 - [ ] Make a version for CPM:

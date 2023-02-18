@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.25)
 
 PROJECT(gcimock
-    VERSION "2023.02.11"
+    VERSION "2023.02.18"
     LANGUAGES CXX
 )
 
@@ -35,27 +35,16 @@ else()
 endif()
 
 # Add the library target
-add_library(${PROJECT_NAME}
-    src/mock_serial.cpp
-    src/Arduino.cpp
-    src/Wire.cpp
-    src/Servo.cpp
-    src/SPI.cpp
-)
-target_include_directories(${PROJECT_NAME}
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
-)
+add_library(${PROJECT_NAME} INTERFACE)
+target_include_directories(${PROJECT_NAME} INTERFACE include)
 
 
 # Examples ====================================================================
-# option(BUILD_EXAMPLES "Examples" OFF)
 message(STATUS "Building ${PROJECT_NAME} examples is ${BUILD_EXAMPLES}")
 if (BUILD_EXAMPLES)
     add_subdirectory(examples/pty)
 endif()
 
-# option(BUILD_GTESTS "build gtests" ON)
 message(STATUS "Building ${PROJECT_NAME} gtests is ${BUILD_GTESTS}")
 if (BUILD_GTESTS)
     add_subdirectory(gtests)

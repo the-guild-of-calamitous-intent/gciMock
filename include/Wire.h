@@ -105,13 +105,13 @@ class TwoWire {
   bool read(const uint8_t reg, const uint8_t count, uint8_t *const data) {return true; }
 
   protected:
-  int fd;
-  uint8_t outbuf[2];
+  // int fd;
+  // uint8_t outbuf[2];
   // #if defined(linux)
   // struct i2c_msg msgs[2];
   // struct i2c_rdwr_ioctl_data i2c_data;
   // #endif
-  uint8_t addr;
+  // uint8_t addr;
 };
 
-extern TwoWire Wire;
+// extern TwoWire Wire;

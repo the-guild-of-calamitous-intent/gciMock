@@ -13,6 +13,12 @@
 #include <iostream>  // cout, endl
 #include <math.h>    // trig
 
+#include <algorithm> // min, max
+#include <stdlib.h>  // rand, srand
+#include <unistd.h>  // usleep
+#include <time.h>    // time, clock_gettime
+#include <sys/time.h> // gettimeofday
+
 // using namespace std;
 using std::string;
 using std::to_string;
@@ -64,12 +70,35 @@ static int analogRead(uint8_t pin) {return 0;}
 static void analogReference(uint8_t mode) {}
 static void analogWrite(uint8_t pin, int32_t val) {}
 
-uint32_t micros(void); // overflow in ~50 days: 2**32 / 1e3 / 3600 / 24 = 49.7
-uint32_t millis(void); // overflow in ~70 mins: 2**32 / 1e6 / 60 = 71.6
+// error: C++ requires a type specifier for all declarations gettimeofday(&epoch, NULL);
+// I seem to HAVE TO get the return value ... wtf?
+// static struct timeval epoch;
+// int s = gettimeofday(&epoch, NULL); // when program starts
+static struct timespec epoch;
+int s = clock_gettime(CLOCK_MONOTONIC_RAW, &epoch);
 
-void delay(uint32_t ms);
-void delayMicroseconds(uint32_t us);
-int constrain(int x, int a, int b);
+/*
+sec      1e0
+millisec 1e-3
+microsec 1e-6
+nanosec  1e-9
+*/
+// overflow in ~50 days: 2**32 / 1e3 / 3600 / 24 = 49.7
+uint32_t micros(void) {
+  // struct timeval now;
+  // gettimeofday(&now, NULL);
+  // return uint32_t((now.tv_sec - epoch.tv_sec) * 1e6 + (now.tv_usec - epoch.tv_usec) );
+
+  struct timespec now;
+  clock_gettime(CLOCK_MONOTONIC_RAW, &now);
+  return uint32_t((now.tv_sec - epoch.tv_sec) * 1e6 + (now.tv_nsec - epoch.tv_nsec) * 1e-3);
+}
+// overflow in ~70 mins: 2**32 / 1e6 / 60 = 71.6
+uint32_t millis(void) {return uint32_t(micros() * 1e-3);}
+
+void delay(uint32_t ms) { usleep(1000 * ms); }
+void delayMicroseconds(uint32_t us) { usleep(us); }
+int constrain(int x, int a, int b) { return std::min(b, std::max(x,a)); }
 
 /*
 Parameters
@@ -81,10 +110,14 @@ A random number between min and max-1. Data type: int32_t.
 
 `random(0,100)` returns [0 - 99]
 */
-int32_t random(int32_t min, int32_t max);
-int32_t random(int32_t max);
-void randomSeed(uint32_t seed);
+int32_t random(int32_t min, int32_t max) {
+  return rand() % (max - min) + min;
+}
+int32_t random(int32_t max){ return random(0, max); }
+void randomSeed(uint32_t seed) { srand(seed); }
 
+
+#if 0
 struct Stream {
   void begin(int r) {}
   void print(string a) {cout << a;}
@@ -104,6 +137,7 @@ struct Stream {
 struct SerialPort: Stream {
 };
 
-extern SerialPort Serial;
-extern SerialPort Serial1;
-extern SerialPort Serial2;
+// extern SerialPort Serial;
+// extern SerialPort Serial1;
+// extern SerialPort Serial2;
+#endif

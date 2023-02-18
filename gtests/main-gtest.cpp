@@ -3,7 +3,7 @@
 #include <SPI.h>
 #include <Servo.h>
 #include <Wire.h>
-#include <Serial.hpp>
+#include <mock_serial.hpp>
 
 
 TEST(gciMock, math) {

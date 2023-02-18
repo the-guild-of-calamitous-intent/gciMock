@@ -104,7 +104,7 @@ class TwoWire {
   uint8_t read(void) {return 0;}
   bool read(const uint8_t reg, const uint8_t count, uint8_t *const data) {return true; }
 
-  protected:
+  // protected:
   // int fd;
   // uint8_t outbuf[2];
   // #if defined(linux)

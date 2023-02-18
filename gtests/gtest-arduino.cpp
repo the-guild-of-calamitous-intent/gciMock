@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
-#include <Arduino.h>
-#include <SPI.h>
-#include <Servo.h>
-#include <Wire.h>
+#include <mock_arduino.hpp>
+#include <mock_servo.hpp>
+#include <mock_wire.hpp>
+#include <mock_spi.hpp>
 
 
 TEST(gciMock, math) {

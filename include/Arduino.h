@@ -75,7 +75,7 @@ static void analogWrite(uint8_t pin, int32_t val) {}
 // static struct timeval epoch;
 // int s = gettimeofday(&epoch, NULL); // when program starts
 static struct timespec epoch;
-int s = clock_gettime(CLOCK_MONOTONIC_RAW, &epoch);
+static int s = clock_gettime(CLOCK_MONOTONIC_RAW, &epoch);
 
 /*
 sec      1e0
@@ -84,7 +84,7 @@ microsec 1e-6
 nanosec  1e-9
 */
 // overflow in ~50 days: 2**32 / 1e3 / 3600 / 24 = 49.7
-uint32_t micros(void) {
+static uint32_t micros(void) {
   // struct timeval now;
   // gettimeofday(&now, NULL);
   // return uint32_t((now.tv_sec - epoch.tv_sec) * 1e6 + (now.tv_usec - epoch.tv_usec) );
@@ -94,11 +94,11 @@ uint32_t micros(void) {
   return uint32_t((now.tv_sec - epoch.tv_sec) * 1e6 + (now.tv_nsec - epoch.tv_nsec) * 1e-3);
 }
 // overflow in ~70 mins: 2**32 / 1e6 / 60 = 71.6
-uint32_t millis(void) {return uint32_t(micros() * 1e-3);}
+static uint32_t millis(void) {return uint32_t(micros() * 1e-3);}
 
-void delay(uint32_t ms) { usleep(1000 * ms); }
-void delayMicroseconds(uint32_t us) { usleep(us); }
-int constrain(int x, int a, int b) { return std::min(b, std::max(x,a)); }
+static void delay(uint32_t ms) { usleep(1000 * ms); }
+static void delayMicroseconds(uint32_t us) { usleep(us); }
+static int constrain(int x, int a, int b) { return std::min(b, std::max(x,a)); }
 
 /*
 Parameters
@@ -110,11 +110,11 @@ A random number between min and max-1. Data type: int32_t.
 
 `random(0,100)` returns [0 - 99]
 */
-int32_t random(int32_t min, int32_t max) {
+static int32_t random(int32_t min, int32_t max) {
   return rand() % (max - min) + min;
 }
-int32_t random(int32_t max){ return random(0, max); }
-void randomSeed(uint32_t seed) { srand(seed); }
+static int32_t random(int32_t max){ return random(0, max); }
+static void randomSeed(uint32_t seed) { srand(seed); }
 
 
 #if 0

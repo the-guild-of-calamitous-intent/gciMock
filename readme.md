@@ -21,6 +21,7 @@ into one project instead of constantly recreating the wheel.
         #include <Wire.h>
     #elif defined(__APPLE__)
         #include <mock_arduino.hpp>
+        #include <mock_serial.hpp>
         #include <mock_wire.hpp>
         SerialPort Serial, Serial1;
         TwoWire Wire;

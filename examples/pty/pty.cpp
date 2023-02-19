@@ -30,7 +30,6 @@ int main() {
   return 0;
 }
 
-
 // int main()  {
 //   char buf[128];
 //   char msg[] = "hello there";
@@ -78,9 +77,9 @@ int main() {
 
 //   memset(buf,0,10);
 
-//   cout << "master write: " << ::write(masterfd, msg, 10) << " " << msg << endl;
-//   sz = ::read(slavefd, (void*)buf, 10);
-//   cout << "slave read " << sz << " " << buf << endl;
+//   cout << "master write: " << ::write(masterfd, msg, 10) << " " << msg <<
+//   endl; sz = ::read(slavefd, (void*)buf, 10); cout << "slave read " << sz <<
+//   " " << buf << endl;
 
 //   // sleep(5);
 
@@ -88,6 +87,3 @@ int main() {
 //   close(masterfd);
 //   return 0;
 // }
-
-
-

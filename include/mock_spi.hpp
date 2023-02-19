@@ -17,21 +17,13 @@ struct SPISettings {
 };
 
 class SPI {
-  public:
+public:
   SPI() {}
   ~SPI() {}
 
-  enum Order_t {
-    LSBFIRST,
-    MSBFIRST
-  };
+  enum Order_t { LSBFIRST, MSBFIRST };
 
-  enum Mode_t {
-    SPI_MODE0,
-    SPI_MODE1,
-    SPI_MODE2,
-    SPI_MODE3
-  };
+  enum Mode_t { SPI_MODE0, SPI_MODE1, SPI_MODE2, SPI_MODE3 };
 
   enum ClockDivider_t {
     SPI_CLOCK_DIV2,
@@ -44,7 +36,7 @@ class SPI {
   };
 
   void begin() {}
-  void beginTransaction(SPISettings& s) {}
+  void beginTransaction(SPISettings &s) {}
   void endTransaction() {}
   void end() {}
   void setBitOrder(Order_t order) {}
@@ -52,6 +44,6 @@ class SPI {
   void setDataMode(Mode_t mode) {}
   uint8_t transfer(uint8_t val) { return 0; }
   uint16_t transfer(uint16_t val) { return 0; }
-  uint8_t* transfer(uint8_t* buff) { return buff; }
+  uint8_t *transfer(uint8_t *buff) { return buff; }
   void usingInterrupt(int num) {}
 };

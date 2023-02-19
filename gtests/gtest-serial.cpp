@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 #include <mock_serial.hpp>
 
-
 TEST(gciMock, serial) {
   SerialPort Serial;
   Serial.begin(9600);

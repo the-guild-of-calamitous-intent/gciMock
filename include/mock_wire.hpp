@@ -56,7 +56,7 @@ dtparam=i2c_arm=on,i2c_arm_baudrate=400000
 #pragma once
 
 #ifndef TwoWire_h
-#define TwoWire_h
+  #define TwoWire_h
 #endif
 
 // #if defined(linux)

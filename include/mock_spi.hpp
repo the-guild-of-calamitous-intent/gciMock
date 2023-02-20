@@ -10,8 +10,8 @@
 struct SPISettings {
   SPISettings(int a, int b, int c) {
     speedMaximum = a;
-    dataOrder = b;
-    dataMode = c;
+    dataOrder    = b;
+    dataMode     = c;
   }
   int speedMaximum, dataOrder, dataMode;
 };
